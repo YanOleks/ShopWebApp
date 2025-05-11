@@ -16,14 +16,18 @@ namespace ShopAPIWebApp.Models
         public string? Name { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        public string Role { get; set; } = "buyer";
+        public UserRole Role { get; set; } = UserRole.Buyer;
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
-        // Навігаційні властивості
         public ICollection<Order>? Orders { get; set; }
         public ICollection<Cart>? Favorites { get; set; }
         public ICollection<Review>? Reviews { get; set; }
+    }
+
+    public enum UserRole
+    {
+        Buyer = 0,
+        Admin = 1
     }
 }

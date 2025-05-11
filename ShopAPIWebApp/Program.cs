@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using ShopAPIWebApp.Models;
+
 namespace ShopAPIWebApp
 {
     public class Program
@@ -8,6 +11,9 @@ namespace ShopAPIWebApp
 
             // Add services to the container.
             builder.Services.AddRazorPages();
+
+            builder.Services.AddDbContext<ShopAPIContext>(options =>
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 
@@ -20,6 +26,9 @@ namespace ShopAPIWebApp
             }
 
             app.UseHttpsRedirection();
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
